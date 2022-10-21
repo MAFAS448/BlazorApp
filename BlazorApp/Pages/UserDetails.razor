@@ -1,0 +1,58 @@
+﻿@page "/userdetails"
+<h3>User Details</h3>
+
+
+
+@if (UserDetails == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <QuickGrid Items="UserDetails.AsQueryable()" ResizableColumns>
+        <PropertyColumn Property="f => f.Id" Title="Id" Sortable="true"/>
+        <PropertyColumn Property="m => m.FName" Title="FName" Sortable="true"/>
+        <PropertyColumn Property="m => m.LName" Title="L.Name"/>
+        <PropertyColumn Property="m => m.Mobile" Title="Mobile" Sortable="true"/>
+
+    </QuickGrid>
+}
+
+
+@code {
+    
+    private List<userDetails>? UserDetails { get; set; } = new List<userDetails>();
+    protected override async Task OnInitializedAsync()
+    {
+        User = await Http.GetFromJsonAsync<List<userDetails>>("api/User");
+    }
+
+    
+
+}
+
+<div class="row">
+	<div class="col-10">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Contact</th>
+					<th>Email</th>
+					<th>Address</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>
